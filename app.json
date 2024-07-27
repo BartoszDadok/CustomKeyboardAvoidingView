@@ -1,36 +1,52 @@
 {
   "expo": {
     "name": "KeyboardAvoidingView",
-    "slug": "KeyboardAvoidingView",
+    "slug": "keyboard-avoiding-view",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
-    "userInterfaceStyle": "automatic",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
     "splash": {
-      "image": "./assets/images/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "image": "./assets/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#000000"
     },
+    "backgroundColor": "#000000",
     "ios": {
-      "supportsTablet": true
+      "buildNumber": "1",
+      "supportsTablet": false,
+      "bundleIdentifier": "com.bd.keyboardavoidingview"
     },
     "android": {
+      "versionCode": 1,
+       "softwareKeyboardLayoutMode" : "adjustNothing",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#000000"
+      },
+      "package": "com.bd.keyboardavoidingview"
     },
-    "web": {
-      "bundler": "metro",
-      "output": "static",
-      "favicon": "./assets/images/favicon.png"
+    "androidNavigationBar": {
+      "visible": true,
+      "barStyle": "light-content"
     },
     "plugins": [
-      "expo-router"
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/NunitoSans-Light.ttf",
+            "./assets/fonts/NunitoSans-Regular.ttf",
+            "./assets/fonts/NunitoSans-Bold.ttf",
+            "./assets/fonts/NunitoSans-ExtraBold.ttf"
+          ]
+        }
+      ]
     ],
-    "experiments": {
-      "typedRoutes": true
+    "extra": {
+      "eas": {
+        "projectId": "b6f31d6a-b7f9-41f6-907e-82373f997b88"
+      }
     }
   }
 }
