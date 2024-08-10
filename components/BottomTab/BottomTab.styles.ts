@@ -3,10 +3,13 @@ import { palette } from "../../theme/palette";
 import { fonts } from "../../fonts";
 
 const styles = StyleSheet.create({
-  infoText: {
-    fontFamily: fonts.regular,
+  tabBarStyle: {
+    backgroundColor: palette.black[200],
+    borderTopColor: "transparent",
+  },
+  label: {
     fontSize: 11,
-    color: palette.text.primary,
+    fontFamily: fonts.regular,
   },
 });
 

@@ -2,10 +2,14 @@ import { StyleSheet } from "react-native";
 import { fonts } from "../../fonts";
 import { palette } from "../../theme/palette";
 
+const PADDING_TOP = 300;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 16,
+  },
+  keyboardContainer: {
+    flex: 1,
   },
   title: {
     fontFamily: fonts.bold,
@@ -17,18 +21,20 @@ const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
     justifyContent: "space-between",
-    paddingHorizontal: 16,
   },
   logoContainer: { flex: 1, justifyContent: "center" },
   inputStyle: {
     backgroundColor: "transparent",
     borderWidth: 1,
     borderRadius: 4,
-    paddingVertical: 14,
+    paddingVertical: 15,
     paddingHorizontal: 15,
-    color: "rgba(255, 255, 255, 0.8)",
+    color: palette.text.primary,
     fontFamily: fonts.regular,
-    marginBottom: 7,
+    marginHorizontal: 16,
+  },
+  keyboardAvoidingViewAnimatedStyles: {
+    paddingTop: PADDING_TOP,
   },
 });
 

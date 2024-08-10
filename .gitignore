@@ -145,9 +145,9 @@ apps/admin-web/config-files
 
 # Expo
 node_modules/
-apps/client-mobile/.expo
-apps/client-mobile/ios
-apps/client-mobile/android
+/.expo
+/ios
+/android
 .expo/
 .yarn/
 dist/

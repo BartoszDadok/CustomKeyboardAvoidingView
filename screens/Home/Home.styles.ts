@@ -1,30 +1,32 @@
 import { StyleSheet } from "react-native";
 import { palette } from "../../theme/palette";
 import { fonts } from "../../fonts";
+import { isBigHeightScreen } from "../../utils/utils";
+
+const PADDING_TOP = isBigHeightScreen ? 300 : 60;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: 16,
-  },
+  screenContainer: { flex: 1 },
   keyboardContainer: {
     flex: 1,
   },
-  wrapper: { flex: 1, justifyContent: "space-between" },
   contentContainer: {
+    flex: 1,
     justifyContent: "center",
+    alignItems: "center",
   },
   buttonsContainer: {
-    gap: 20,
-    flexDirection: "row",
-    marginTop: 50,
     height: 100,
+    flexGrow: 0,
+    marginTop: 30,
+    paddingHorizontal: 10,
   },
   button: {
     width: "45%",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "rgba(15, 11, 9, 0.5)",
+    backgroundColor: palette.purple[400],
+    marginRight: 20,
   },
   buttonText: {
     color: palette.text.secondary,
@@ -35,14 +37,19 @@ const styles = StyleSheet.create({
   },
   input: {
     backgroundColor: "transparent",
-    borderColor: "rgba(255, 255, 255, 0.5)",
     borderWidth: 1,
     borderRadius: 4,
-    paddingVertical: 14,
+    paddingVertical: 15,
     paddingHorizontal: 15,
-    color: "rgba(255, 255, 255, 0.8)",
+    color: palette.text.primary,
     fontFamily: fonts.regular,
-    marginBottom: 7,
+    marginHorizontal: 16,
+  },
+  keyboardAvoidingViewAnimatedStyles: {
+    paddingTop: PADDING_TOP,
+  },
+  statusBar: {
+    zIndex: 10,
   },
 });
 

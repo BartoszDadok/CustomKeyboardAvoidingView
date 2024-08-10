@@ -4,7 +4,6 @@ import { hideAsync, preventAutoHideAsync } from "expo-splash-screen";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
 import { Navigator } from "../routes";
-import { Toast } from "../components/Toast/Toast";
 
 preventAutoHideAsync();
 
@@ -32,7 +31,6 @@ const Root = () => {
     <NavigationContainer>
       <SafeAreaProvider>
         <Navigator />
-        <Toast />
       </SafeAreaProvider>
     </NavigationContainer>
   ) : null;

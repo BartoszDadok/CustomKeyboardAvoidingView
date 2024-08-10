@@ -4,16 +4,17 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 import { ViewStyle } from "react-native/Libraries/StyleSheet/StyleSheetTypes";
-
 import { useAppContext } from "../../providers/AppProvider";
 
 const INITIAL_POSITION = 0;
-const BOTTOM_TAB_HEIGHT = 65;
+const BOTTOM_TAB_HEIGHT = 80;
+
 type Props = {
   offset?: number;
   customStyles?: ViewStyle;
   inputAtBottomScreen?: boolean;
   containBottomTabNavigator?: boolean;
+  customStylesWithTiming?: { [key: string]: number | string };
 };
 const CustomKeyboardAvoidingView = ({
   children,
@@ -21,11 +22,21 @@ const CustomKeyboardAvoidingView = ({
   customStyles,
   inputAtBottomScreen,
   containBottomTabNavigator,
+  customStylesWithTiming = {},
 }: PropsWithChildren<Props>) => {
   // We get the keyboardOpen and keyboardHeight from the AppProvider
   const { keyboardOpen, keyboardHeight } = useAppContext();
 
+  // We can animate the styles we want when the keyboard is open. In this app for example we animate paddingTop on Home Screen.
   const customAnimatedStyles = useAnimatedStyle(() => {
+    const customStylesTiming = { ...customStylesWithTiming };
+
+    Object.keys(customStylesTiming).forEach((key) => {
+      customStylesTiming[key] = withTiming(
+        keyboardOpen ? customStylesTiming[key] : INITIAL_POSITION
+      );
+    });
+
     // Here we calculate the translateY value based on the keyboard state(open and KeyboardHeight), input position and bottom tab navigator
     const getTranslateYCoordinate = () => {
       // When the keyboard is open and the input and bottom tabNavigator is at the bottom of the screen
@@ -33,7 +44,7 @@ const CustomKeyboardAvoidingView = ({
         return -keyboardHeight + BOTTOM_TAB_HEIGHT;
         // Only when the keyboard is open and the input is at the bottom of the screen
       } else if (keyboardOpen && inputAtBottomScreen) {
-        return -keyboardHeight;
+        return -keyboardHeight + offset;
         // Only when the keyboard is open, no input at the bottom of the screen and bottom tab navigator
       } else if (keyboardOpen) {
         return -offset;
@@ -46,6 +57,7 @@ const CustomKeyboardAvoidingView = ({
 
     return {
       ...customStyles,
+      ...customStylesTiming,
       transform: [
         {
           translateY: withTiming(translateY),

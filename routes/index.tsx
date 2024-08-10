@@ -1,29 +1,9 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Home } from "../screens/Home/Home";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { WithoutBottomTab } from "../screens/WithoutBottomTab/WithoutBottomTab";
-import { palette } from "../theme/palette";
 import { WithInputsInTheMiddle } from "../screens/WithInputsInTheMiddle/WithInputsInTheMiddle";
-import { KeyboardSettings } from "../screens/KeyboardSettings/KeyboardSettings";
+import { BottomTab } from "../components/BottomTab/BottomTab";
 
 const Stack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
-
-const BottomTab = () => {
-  return (
-    <Tab.Navigator
-      screenOptions={{
-        headerShown: false,
-        tabBarStyle: {
-          backgroundColor: palette.black[200],
-          borderTopColor: "transparent",
-        },
-      }}
-    >
-      <Tab.Screen name="Home" component={Home} />
-    </Tab.Navigator>
-  );
-};
 
 const Navigator = () => {
   return (
@@ -37,11 +17,6 @@ const Navigator = () => {
       <Stack.Screen
         name="WithInputsInTheMiddle"
         component={WithInputsInTheMiddle}
-      />
-      <Stack.Screen
-        options={{ animation: "slide_from_bottom" }}
-        name="KeyboardSettings"
-        component={KeyboardSettings}
       />
     </Stack.Navigator>
   );

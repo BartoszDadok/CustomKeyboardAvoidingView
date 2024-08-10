@@ -1,14 +1,13 @@
-import { Image, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import { styles } from "./Logo.styles";
 import { isIOS } from "../../utils/utils";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { palette } from "../../theme/palette";
-// import LogoIcon from "../../assets/logo/keyboard-logo.svg";
 
 const Logo = () => {
   return (
     <>
-      <View style={{ justifyContent: "center", alignItems: "center" }}>
+      <View style={styles.logoContainer}>
         <MaterialCommunityIcons
           name="keyboard-variant"
           size={70}

@@ -1,10 +1,8 @@
-import {
-  SafeAreaView,
-  useSafeAreaInsets,
-} from "react-native-safe-area-context";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { styles } from "./WithoutBottomTab.styles";
 import {
   Keyboard,
+  LayoutChangeEvent,
   Text,
   TextInput,
   TouchableWithoutFeedback,
@@ -17,10 +15,18 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../routes/types";
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
-import { SettingsButton } from "../../components/SettingsButton/SettingsButton";
+import { CustomKeyboardAvoidingView } from "../../components/CustomKeyboardAvoidingView";
+import { Backdrop } from "../../components/Backdrop/Backdrop";
+import { useAppContext } from "../../providers/AppProvider";
+import { BackdropInput } from "../../components/Backdrop/BackdropInput";
+import { palette } from "../../theme/palette";
+
+const INPUT_MARGIN_BOTTOM = 7;
 
 const WithoutBottomTab = () => {
+  const { keyboardOpen } = useAppContext();
   const [isFocused, setIsFocused] = useState(false);
+  const [inputHeight, setInputHeight] = useState(0);
   const { bottom } = useSafeAreaInsets();
   const { goBack } =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
@@ -34,36 +40,67 @@ const WithoutBottomTab = () => {
   const handleBlur = () => {
     setIsFocused(false);
   };
+  const onClickAway = () => {
+    Keyboard.dismiss();
+    setIsFocused(false);
+  };
+  const handleLayout = (event: LayoutChangeEvent) => {
+    const { height } = event.nativeEvent.layout;
+    setInputHeight(height);
+  };
 
   return (
-    <LinearGradientView>
-      <ScreenHeader onBackButton={onBackButton} title="Without Bottom Tab" />
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={[styles.contentContainer, { paddingBottom: bottom }]}>
-          <SettingsButton />
-          <View style={styles.logoContainer}>
-            <Logo />
-            <Text style={styles.title}>Without Bottom Tab</Text>
-          </View>
-
-          <TextInput
-            placeholder="Type something..."
-            placeholderTextColor={"rgba(255, 255, 255, 0.5)"}
-            multiline={true}
-            style={[
-              styles.inputStyle,
-              {
-                borderColor: isFocused
-                  ? "rgba(255, 255, 255, 0.9)"
-                  : "rgba(255, 255, 255, 0.5)",
-              },
-            ]}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
+    <TouchableWithoutFeedback onPress={onClickAway}>
+      <View style={styles.container}>
+        <LinearGradientView>
+          <ScreenHeader
+            onBackButton={onBackButton}
+            title="Without Bottom Tab"
           />
-        </View>
-      </TouchableWithoutFeedback>
-    </LinearGradientView>
+
+          <CustomKeyboardAvoidingView
+            inputAtBottomScreen={true}
+            customStyles={styles.keyboardContainer}
+            customStylesWithTiming={styles.keyboardAvoidingViewAnimatedStyles}
+            offset={bottom}
+          >
+            <View style={[styles.contentContainer, { paddingBottom: bottom }]}>
+              <View style={styles.logoContainer}>
+                <Logo />
+                <Text style={styles.title}>Without Bottom Tab</Text>
+              </View>
+              <View>
+                {keyboardOpen && <BackdropInput />}
+                <TextInput
+                  placeholder="Type something..."
+                  placeholderTextColor={palette.grey[400]}
+                  multiline={true}
+                  style={[
+                    styles.inputStyle,
+                    {
+                      borderColor: isFocused
+                        ? palette.grey[100]
+                        : palette.grey[400],
+                      marginBottom: INPUT_MARGIN_BOTTOM,
+                    },
+                  ]}
+                  onFocus={handleFocus}
+                  onBlur={handleBlur}
+                  onLayout={handleLayout}
+                />
+              </View>
+            </View>
+            {keyboardOpen && (
+              <Backdrop
+                customStyles={{
+                  marginBottom: inputHeight + bottom + INPUT_MARGIN_BOTTOM,
+                }}
+              />
+            )}
+          </CustomKeyboardAvoidingView>
+        </LinearGradientView>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
