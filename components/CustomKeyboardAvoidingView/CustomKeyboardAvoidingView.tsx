@@ -7,13 +7,12 @@ import { ViewStyle } from "react-native/Libraries/StyleSheet/StyleSheetTypes";
 import { useAppContext } from "../../providers/AppProvider";
 
 const INITIAL_POSITION = 0;
-const BOTTOM_TAB_HEIGHT = 80;
 
 type Props = {
   offset?: number;
   customStyles?: ViewStyle;
   inputAtBottomScreen?: boolean;
-  containBottomTabNavigator?: boolean;
+  bottomTabNavigatorHeight?: number;
   customStylesWithTiming?: { [key: string]: number | string };
 };
 const CustomKeyboardAvoidingView = ({
@@ -21,7 +20,7 @@ const CustomKeyboardAvoidingView = ({
   offset = INITIAL_POSITION,
   customStyles,
   inputAtBottomScreen,
-  containBottomTabNavigator,
+  bottomTabNavigatorHeight,
   customStylesWithTiming = {},
 }: PropsWithChildren<Props>) => {
   // We get the keyboardOpen and keyboardHeight from the AppProvider
@@ -40,8 +39,8 @@ const CustomKeyboardAvoidingView = ({
     // Here we calculate the translateY value based on the keyboard state(open and KeyboardHeight), input position and bottom tab navigator
     const getTranslateYCoordinate = () => {
       // When the keyboard is open and the input and bottom tabNavigator is at the bottom of the screen
-      if (keyboardOpen && inputAtBottomScreen && containBottomTabNavigator) {
-        return -keyboardHeight + BOTTOM_TAB_HEIGHT;
+      if (keyboardOpen && inputAtBottomScreen && bottomTabNavigatorHeight) {
+        return -keyboardHeight + bottomTabNavigatorHeight;
         // Only when the keyboard is open and the input is at the bottom of the screen
       } else if (keyboardOpen && inputAtBottomScreen) {
         return -keyboardHeight + offset;

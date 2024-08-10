@@ -20,6 +20,7 @@ import { CustomKeyboardAvoidingView } from "../../components/CustomKeyboardAvoid
 import { Backdrop } from "../../components/Backdrop/Backdrop";
 import { useAppContext } from "../../providers/AppProvider";
 import { BackdropInput } from "../../components/Backdrop/BackdropInput";
+import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 
 const INPUT_MARGIN_BOTTOM = 7;
 
@@ -30,6 +31,8 @@ const Home = () => {
 
   const { navigate } =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+  const tabBarHeight = useBottomTabBarHeight();
 
   const gotToScreenWithoutBottomTab = () => {
     navigate("WithoutBottomTab");
@@ -60,7 +63,7 @@ const Home = () => {
             inputAtBottomScreen={true}
             customStyles={styles.keyboardContainer}
             customStylesWithTiming={styles.keyboardAvoidingViewAnimatedStyles}
-            containBottomTabNavigator={true}
+            bottomTabNavigatorHeight={tabBarHeight}
           >
             <View style={styles.contentContainer}>
               <Logo />

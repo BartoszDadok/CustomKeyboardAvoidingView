@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 0,
     height: 7,
-    width: "100%", // Adjust as needed to cover the left side
+    width: "100%",
     backgroundColor: palette.black[400],
   },
 });

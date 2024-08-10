@@ -12,10 +12,13 @@ import { LinearGradientView } from "../../components/LinearGradientView/LinearGr
 import { useState } from "react";
 import { CustomKeyboardAvoidingView } from "../../components/CustomKeyboardAvoidingView";
 import { palette } from "../../theme/palette";
+import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 
 const ButtonBottom = () => {
   const [isFocused, setIsFocused] = useState(false);
   const { top } = useSafeAreaInsets();
+
+  const tabBarHeight = useBottomTabBarHeight();
 
   const handleFocus = () => {
     setIsFocused(true);
@@ -49,7 +52,7 @@ const ButtonBottom = () => {
 
           <CustomKeyboardAvoidingView
             inputAtBottomScreen={true}
-            containBottomTabNavigator={true}
+            bottomTabNavigatorHeight={tabBarHeight}
           >
             <TouchableOpacity style={styles.button}>
               <Text style={styles.buttonText}>Send</Text>

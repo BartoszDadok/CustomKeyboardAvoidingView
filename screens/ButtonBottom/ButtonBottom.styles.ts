@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.regular,
     marginBottom: 7,
     minHeight: 120,
+    textAlignVertical: "top",
   },
   button: {
     alignSelf: "flex-end",

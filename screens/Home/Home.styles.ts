@@ -3,7 +3,7 @@ import { palette } from "../../theme/palette";
 import { fonts } from "../../fonts";
 import { isBigHeightScreen } from "../../utils/utils";
 
-const PADDING_TOP = isBigHeightScreen ? 300 : 60;
+const PADDING_TOP = isBigHeightScreen ? 300 : 200;
 
 const styles = StyleSheet.create({
   screenContainer: { flex: 1 },
