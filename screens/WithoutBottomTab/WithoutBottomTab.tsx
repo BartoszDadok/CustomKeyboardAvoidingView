@@ -59,9 +59,10 @@ const WithoutBottomTab = () => {
           />
 
           <CustomKeyboardAvoidingView
-            inputAtBottomScreen={true}
+            screenWithBottomTabNavigation={false}
+            positionBottom={true}
+            animatedPaddingTopValue={250}
             customStyles={styles.keyboardContainer}
-            customStylesWithTiming={styles.keyboardAvoidingViewAnimatedStyles}
             offset={bottom}
           >
             <View style={[styles.contentContainer, { paddingBottom: bottom }]}>

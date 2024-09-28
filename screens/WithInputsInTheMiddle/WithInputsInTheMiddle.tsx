@@ -61,7 +61,9 @@ const WithInputsInTheMiddle = () => {
               </View>
               <View style={styles.inputContainer}>
                 <TextInput
+                  textContentType="emailAddress"
                   placeholder="Login"
+                  autoComplete="email"
                   placeholderTextColor={palette.grey[400]}
                   style={[
                     styles.input,
@@ -87,7 +89,6 @@ const WithInputsInTheMiddle = () => {
                   ]}
                   onFocus={() => handleFocus("password")}
                   onBlur={() => handleBlur("password")}
-                  secureTextEntry
                 />
                 <TouchableOpacity style={styles.button}>
                   <Text style={styles.buttonText}>Submit</Text>

@@ -60,10 +60,10 @@ const Home = () => {
       <View style={styles.screenContainer}>
         <LinearGradientView>
           <CustomKeyboardAvoidingView
-            inputAtBottomScreen={true}
+            positionBottom={true}
+            screenWithBottomTabNavigation={true}
+            animatedPaddingTopValue={300}
             customStyles={styles.keyboardContainer}
-            customStylesWithTiming={styles.keyboardAvoidingViewAnimatedStyles}
-            bottomTabNavigatorHeight={tabBarHeight}
           >
             <View style={styles.contentContainer}>
               <Logo />
